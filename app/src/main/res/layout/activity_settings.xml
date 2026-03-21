@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#121212">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Master Switch to Kill or Start the Background Service -->
+    <Switch
+        android:id="@+id/switch_tracking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Background Tracking"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:thumbTint="#00E5FF"
+        android:trackTint="#555555"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body Weight (kg)"
+        android:textColor="#00E5FF"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/et_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="e.g. 70"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#555555"
+        android:background="#222222"
+        android:padding="16dp"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Step Goal"
+        android:textColor="#00E5FF"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/et_step_goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="e.g. 10000"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#555555"
+        android:background="#222222"
+        android:padding="16dp"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Character Animation"
+        android:textColor="#00E5FF"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <RadioGroup
+        android:id="@+id/rg_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="32dp">
+
+        <RadioButton
+            android:id="@+id/rb_walking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Walking"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00E5FF"/>
+
+        <RadioButton
+            android:id="@+id/rb_jogging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jogging"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00E5FF"
+            android:layout_marginStart="16dp"/>
+
+        <RadioButton
+            android:id="@+id/rb_sprinting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sprinting"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00E5FF"
+            android:layout_marginStart="16dp"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Goal &amp; Animation"
+        android:backgroundTint="#00E5FF"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:layout_marginBottom="48dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Danger Zone"
+        android:textColor="#FF5252"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btn_reset_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Force Reset Step Count to 0"
+        android:backgroundTint="#FF5252"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:padding="16dp"/>
+
+</LinearLayout>
