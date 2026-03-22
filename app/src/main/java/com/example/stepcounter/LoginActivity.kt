@@ -37,10 +37,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // The default_web_client_id is safely read directly from google-services.json
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(resources.getIdentifier("default_web_client_id", "string", packageName))) 
-            .requestEmail()
-            .build()
+        val clientIdRes = resources.getIdentifier("default_web_client_id", "string", packageName)
+        val gsoBuilder = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail()
+        
+        if (clientIdRes != 0) {
+            gsoBuilder.requestIdToken(getString(clientIdRes))
+        }
+        
+        val gso = gsoBuilder.build()
             
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
