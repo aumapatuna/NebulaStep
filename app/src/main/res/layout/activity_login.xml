@@ -37,10 +37,21 @@
         android:id="@+id/btn_google_sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in with Google"
+        android:text="Sign in with Google (Requires SHA-1)"
         android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
         android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btn_guest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue Offline (No Cloud Sync)"
+        android:backgroundTint="#2E2E2E"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:padding="16dp"
         android:layout_marginBottom="16dp"/>

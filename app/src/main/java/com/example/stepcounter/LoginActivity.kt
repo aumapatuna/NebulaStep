@@ -52,6 +52,12 @@ class LoginActivity : AppCompatActivity() {
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, 9001)
         }
+        
+        // Allows testing the hardware sensor immediately without configuring SHA-1 keys!
+        findViewById<Button>(R.id.btn_guest).setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
