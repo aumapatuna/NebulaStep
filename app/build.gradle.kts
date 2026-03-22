@@ -1,8 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    // WARNING: This plugin requires you to have the google-services.json file inside your app/ folder!
-    id("com.google.gms.google-services") version "4.4.1" apply false
+    id("com.google.gms.google-services")
 }
 
 android {
