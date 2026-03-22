@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "155449849401",
+    "project_id": "blueray-255113",
+    "storage_bucket": "blueray-255113.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155449849401:android:1f64dbe601b39bdb22ffe8",
+        "android_client_info": {
+          "package_name": "com.nebulastep.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYNbhtcECElle4wyP69sAC6loaAW7aj8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
