@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nebulastep.app"
+    namespace = "com.example.stepcounter"
     compileSdk = 34
 
     defaultConfig {
