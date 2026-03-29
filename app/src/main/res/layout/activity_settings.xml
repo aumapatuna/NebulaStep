@@ -139,4 +139,15 @@
         android:textStyle="bold"
         android:padding="16dp"/>
 
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Sign Out / Switch Accounts"
+        android:backgroundTint="#2E2E2E"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:padding="16dp"/>
+
 </LinearLayout>

@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -89,9 +92,24 @@ class SettingsActivity : AppCompatActivity() {
                 
             Toast.makeText(this, "All step data forcefully wiped!", Toast.LENGTH_SHORT).show()
             
-            // StepCounterService handles 'previousTotalSteps' independently, 
             // so if we wanted to truly wipe it we would also wipe 'key1'.
             // For now, this just zeros the session out.
+        }
+        
+        val btnLogout = findViewById<Button>(R.id.btn_logout)
+        btnLogout.setOnClickListener {
+            // Log out from Firebase entirely
+            FirebaseAuth.getInstance().signOut()
+            
+            // Log out from the Google Client cache so the picker returns on next sign in
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+            GoogleSignIn.getClient(this, gso).signOut().addOnCompleteListener {
+                val loginIntent = Intent(this, LoginActivity::class.java)
+                // Clear the backstack so they can't press back to enter the app
+                loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(loginIntent)
+                finish()
+            }
         }
     }
 }
