@@ -2,6 +2,7 @@ package com.example.stepcounter
 
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -31,8 +32,7 @@ class LoginActivity : AppCompatActivity() {
         
         // If the user's phone already has an active Cloud Login Token, instantly skip this screen!
         if (auth.currentUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            proceedToNextScreen()
             return
         }
 
@@ -66,9 +66,20 @@ class LoginActivity : AppCompatActivity() {
         
         // Allows testing the hardware sensor immediately without configuring SHA-1 keys!
         findViewById<Button>(R.id.btn_guest).setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            proceedToNextScreen()
         }
+    }
+    
+    private fun proceedToNextScreen() {
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val isSetupComplete = sharedPreferences.getBoolean("isSetupComplete", false)
+        
+        if (isSetupComplete) {
+            startActivity(Intent(this, MainActivity::class.java))
+        } else {
+            startActivity(Intent(this, SetupActivity::class.java))
+        }
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -93,8 +104,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Cloud Sync Enabled!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    proceedToNextScreen()
                 } else {
                     Toast.makeText(this, "Firebase Authentication Blocked. Check Console Rules.", Toast.LENGTH_LONG).show()
                 }

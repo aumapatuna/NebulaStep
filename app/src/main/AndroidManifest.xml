@@ -54,6 +54,10 @@
             android:name=".ReportActivity"
             android:exported="false" />
             
+        <activity
+            android:name=".SetupActivity"
+            android:exported="false" />
+            
         <!-- Required for the Custom OTA Engine to share the APK URL directly with Android OS Package Installer -->
         <provider
             android:name="androidx.core.content.FileProvider"
