@@ -13,6 +13,7 @@
     <!-- Needed for Android 14+ -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
     <!-- Needed for Android 13+ to post the AOD Notification -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- App side-loading update requirements -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.INTERNET" />
