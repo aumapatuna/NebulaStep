@@ -142,21 +142,22 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         val ivWalking = findViewById<android.widget.ImageView>(R.id.iv_walking)
         val animStyle = sharedPreferences.getString("animStyle", "walking")
         
-        if (animStyle == "walking") {
-            // Show new gorgeous static illustration
+        if (animStyle == "walking" || animStyle == "jogging") {
+            // Show new gorgeous static illustrations
             lottieView.visibility = android.view.View.GONE
             ivWalking.visibility = android.view.View.VISIBLE
+            
+            if (animStyle == "jogging") {
+                ivWalking.setImageResource(R.drawable.jogging_image)
+            } else {
+                ivWalking.setImageResource(R.drawable.walking_image)
+            }
         } else {
-            // Show Lottie animations for jogging and sprinting
+            // Show Lottie animations for sprinting
             ivWalking.visibility = android.view.View.GONE
             lottieView.visibility = android.view.View.VISIBLE
             
-            val resName = when(animStyle) {
-                "jogging" -> "jogging_animation"
-                "sprinting" -> "sprinting_animation"
-                else -> "walking_animation"
-            }
-            val animResId = resources.getIdentifier(resName, "raw", packageName)
+            val animResId = resources.getIdentifier("sprinting_animation", "raw", packageName)
             if (animResId != 0) {
                 lottieView.setAnimation(animResId)
                 lottieView.playAnimation()
