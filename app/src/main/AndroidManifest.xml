@@ -69,6 +69,16 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <!-- Android Home Screen Widget Configuration -->
+        <receiver android:name=".StepWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/step_widget_info" />
+        </receiver>
+
     </application>
 
 </manifest>

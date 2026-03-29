@@ -191,6 +191,13 @@ class StepCounterService : Service(), SensorEventListener {
         val notification = createNotification(currentSessionSteps)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.notify(NOTIFICATION_ID, notification)
+        
+        // --- NEW: Live-update the Android Home Screen Widget ---
+        val intent = Intent(this, StepWidgetProvider::class.java)
+        intent.action = android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        val ids = android.appwidget.AppWidgetManager.getInstance(application).getAppWidgetIds(android.content.ComponentName(application, StepWidgetProvider::class.java))
+        intent.putExtra(android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+        sendBroadcast(intent)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
