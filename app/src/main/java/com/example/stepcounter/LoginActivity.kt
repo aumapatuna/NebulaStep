@@ -1,8 +1,10 @@
 package com.example.stepcounter
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -35,6 +37,15 @@ class LoginActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_login)
+
+        // Floating logo animation
+        val ivLogo = findViewById<ImageView>(R.id.iv_logo)
+        ObjectAnimator.ofFloat(ivLogo, "translationY", -20f, 20f).apply {
+            duration = 2500
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+            start()
+        }
 
         // The default_web_client_id is safely read directly from google-services.json
         val clientIdRes = resources.getIdentifier("default_web_client_id", "string", packageName)

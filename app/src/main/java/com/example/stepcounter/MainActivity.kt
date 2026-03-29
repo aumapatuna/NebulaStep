@@ -115,14 +115,28 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         val goal = sharedPreferences.getInt("stepGoal", 10000)
         val weight = sharedPreferences.getFloat("weight", 70f)
         
+        val oldSteps = stepsTextView.text.toString().toIntOrNull() ?: 0
         stepsTextView.text = currentSteps.toString()
-        titleTextView.text = "Steps Today (Goal: $goal)"
+        titleTextView.text = "Today's Progress (Goal: $goal)"
+        
+        // Pop heartbeat animation when steps increase
+        if (currentSteps > oldSteps && currentSteps > 0) {
+            stepsTextView.animate()
+                .scaleX(1.3f).scaleY(1.3f)
+                .setDuration(150)
+                .withEndAction {
+                    stepsTextView.animate()
+                        .scaleX(1.0f).scaleY(1.0f)
+                        .setDuration(150)
+                        .start()
+                }.start()
+        }
         
         // Accurate Caloric Equation relative to body mass:
         // Calories = Steps * (Weight(kg) * 0.0005)
         val calories = currentSteps * (weight * 0.0005f)
         val caloriesTextView = findViewById<TextView>(R.id.tv_calories)
-        caloriesTextView.text = "🔥 ${calories.toInt()} kcal"
+        caloriesTextView.text = "🔥 ${calories.toInt()} kcal burned"
         
         val lottieView = findViewById<com.airbnb.lottie.LottieAnimationView>(R.id.lottie_walking)
         val animStyle = sharedPreferences.getString("animStyle", "walking")
