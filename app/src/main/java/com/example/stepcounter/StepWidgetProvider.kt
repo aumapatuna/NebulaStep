@@ -22,7 +22,15 @@ class StepWidgetProvider : AppWidgetProvider() {
             val steps = prefs.getInt("currentSteps", 0)
 
             val views = RemoteViews(context.packageName, R.layout.widget_step_counter)
-            views.setTextViewText(R.id.tv_widget_steps, "$steps")
+            
+            // Format number with commas like the design (e.g., "8,432")
+            val formattedSteps = java.text.NumberFormat.getNumberInstance(java.util.Locale.US).format(steps)
+            views.setTextViewText(R.id.tv_widget_steps, formattedSteps)
+
+            // Update the circular progress ring (max 10000)
+            val maxSteps = 10000
+            val progress = minOf(steps, maxSteps)
+            views.setProgressBar(R.id.pb_widget_steps, maxSteps, progress, false)
 
             // Clicking the widget boldly returns you to the main app dashboard
             val intent = Intent(context, LoginActivity::class.java) // Use LoginActivity to respect routing

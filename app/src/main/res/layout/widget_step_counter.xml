@@ -1,53 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp">
 
-    <LinearLayout
-        android:id="@+id/widget_root"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/bg_widget_glass"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="24dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:elevation="4dp">
+        android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/iv_widget_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_widget_run" 
-            android:layout_marginEnd="16dp"/>
-
-        <LinearLayout
+        <!-- Info / Branding -->
+        <TextView
+            android:id="@+id/tv_widget_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="start">
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:text="NebulaSteps"
+            android:textColor="#88FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.05" />
 
-            <TextView
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_widget_run" />
+
+        <!-- Circular Progress Ring Container -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ProgressBar
+                android:id="@+id/pb_widget_steps"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="false"
+                android:max="10000"
+                android:progress="0"
+                android:progressDrawable="@drawable/widget_circular_progress" />
+
+            <!-- Core Text Inside Ring -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your steps:"
-                android:textColor="#B3FFFFFF"
-                android:textSize="13sp"
-                android:fontFamily="sans-serif-medium" />
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/tv_widget_steps"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="--"
-                android:textColor="#00E5FF"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-black" />
-        </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
+                <TextView
+                    android:id="@+id/tv_widget_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="steps"
+                    android:textColor="#88FFFFFF"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
