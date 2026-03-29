@@ -139,19 +139,28 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         caloriesTextView.text = "🔥 ${calories.toInt()} kcal burned"
         
         val lottieView = findViewById<com.airbnb.lottie.LottieAnimationView>(R.id.lottie_walking)
+        val ivWalking = findViewById<android.widget.ImageView>(R.id.iv_walking)
         val animStyle = sharedPreferences.getString("animStyle", "walking")
         
-        val resName = when(animStyle) {
-            "jogging" -> "jogging_animation"
-            "sprinting" -> "sprinting_animation"
-            else -> "walking_animation"
-        }
-        
-        // Safely attempts to load the new JSON animation dynamically by filename
-        val animResId = resources.getIdentifier(resName, "raw", packageName)
-        if (animResId != 0) {
-            lottieView.setAnimation(animResId)
-            lottieView.playAnimation() // Ensure it loops properly
+        if (animStyle == "walking") {
+            // Show new gorgeous static illustration
+            lottieView.visibility = android.view.View.GONE
+            ivWalking.visibility = android.view.View.VISIBLE
+        } else {
+            // Show Lottie animations for jogging and sprinting
+            ivWalking.visibility = android.view.View.GONE
+            lottieView.visibility = android.view.View.VISIBLE
+            
+            val resName = when(animStyle) {
+                "jogging" -> "jogging_animation"
+                "sprinting" -> "sprinting_animation"
+                else -> "walking_animation"
+            }
+            val animResId = resources.getIdentifier(resName, "raw", packageName)
+            if (animResId != 0) {
+                lottieView.setAnimation(animResId)
+                lottieView.playAnimation()
+            }
         }
     }
 }
