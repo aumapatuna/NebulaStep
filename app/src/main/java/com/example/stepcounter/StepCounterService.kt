@@ -31,7 +31,7 @@ class StepCounterService : Service(), SensorEventListener {
     private var lastSavedDate = ""
     private var currentSessionSteps = 0
 
-    private val CHANNEL_ID = "StepCounterChannel"
+    private val CHANNEL_ID = "StepCounterChannel_V2"
     private val NOTIFICATION_ID = 1
 
     override fun onCreate() {
@@ -162,6 +162,7 @@ class StepCounterService : Service(), SensorEventListener {
             ).apply {
                 description = "Shows your daily steps directly on the lock screen."
                 setShowBadge(false)
+                lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             }
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)

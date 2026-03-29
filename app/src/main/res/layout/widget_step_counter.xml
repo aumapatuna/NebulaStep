@@ -1,24 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_glass_card"
-    android:gravity="center"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="8dp">
 
-    <ImageView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/running_image" 
-        android:layout_marginEnd="12dp"/>
-
-    <TextView
-        android:id="@+id/tv_widget_steps"
+    <LinearLayout
+        android:id="@+id/widget_root"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0 Steps"
-        android:textColor="#00E5FF"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:layout_gravity="center"
+        android:background="@drawable/bg_widget_glass"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:elevation="4dp">
+
+        <ImageView
+            android:id="@+id/iv_widget_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_widget_run" 
+            android:layout_marginEnd="16dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="start">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your steps:"
+                android:textColor="#B3FFFFFF"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/tv_widget_steps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="#00E5FF"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-black" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
