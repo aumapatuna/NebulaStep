@@ -168,6 +168,36 @@ class StepCounterService : Service(), SensorEventListener {
         }
     }
 
+    private fun createDynamicSmallIcon(steps: Int): androidx.core.graphics.drawable.IconCompat {
+        val size = 128
+        val bitmap = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888)
+        val canvas = android.graphics.Canvas(bitmap)
+
+        // Draw the animating vector character firmly in the top half
+        val iconRes = if (steps % 2 == 0) R.drawable.ic_run_frame_1 else R.drawable.ic_run_frame_2
+        val drawable = androidx.core.content.ContextCompat.getDrawable(this, iconRes)
+        if (drawable != null) {
+            drawable.setBounds(32, 4, size - 32, (size / 2) + 20)
+            drawable.setTint(android.graphics.Color.WHITE)
+            drawable.draw(canvas)
+        }
+
+        // Draw the pure numeric step count in the bottom half
+        val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+            color = android.graphics.Color.WHITE
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = android.graphics.Typeface.create(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD)
+            textSize = if (steps.toString().length >= 5) 36f else 46f
+        }
+
+        val text = steps.toString()
+        val xPos = (size / 2).toFloat()
+        val yPos = size - 12f
+        canvas.drawText(text, xPos, yPos, paint)
+
+        return androidx.core.graphics.drawable.IconCompat.createWithBitmap(bitmap)
+    }
+
     private fun createNotification(steps: Int): Notification {
         // If they tap the lock-screen widget, open the main App UI.
         val intent = Intent(this, MainActivity::class.java)
@@ -175,17 +205,18 @@ class StepCounterService : Service(), SensorEventListener {
             this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Mathematically animate the icon based on the parity of the current step count!
-        val iconRes = if (steps % 2 == 0) R.drawable.ic_run_frame_1 else R.drawable.ic_run_frame_2
+        // Use our dynamic canvas injection to fuse the animation + steps into the AOD slot completely natively!
+        val dynamicIcon = createDynamicSmallIcon(steps)
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("👟 Steps Today: $steps") 
             .setContentText("Walking to stay healthy!")
-            .setSmallIcon(iconRes)
+            .setSmallIcon(dynamicIcon)
             .setContentIntent(pendingIntent)
             .setOngoing(true) // It cannot be swiped away!
             .setOnlyAlertOnce(true) // Updates silently so it doesn't vibrate their pocket every step
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) // CRUCIAL: Makes it visible on Lock Screen!
+            .setCategory(NotificationCompat.CATEGORY_STATUS) // Pushes it further into persistent UI bounds
             .build()
     }
 
