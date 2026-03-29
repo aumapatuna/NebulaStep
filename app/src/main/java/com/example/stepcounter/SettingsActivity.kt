@@ -43,7 +43,7 @@ class SettingsActivity : AppCompatActivity() {
         val rgAnimation = findViewById<android.widget.RadioGroup>(R.id.rg_animation)
         val rbWalking = findViewById<android.widget.RadioButton>(R.id.rb_walking)
         val rbJogging = findViewById<android.widget.RadioButton>(R.id.rb_jogging)
-        val rbSprinting = findViewById<android.widget.RadioButton>(R.id.rb_sprinting)
+        val rbRunning = findViewById<android.widget.RadioButton>(R.id.rb_running)
 
         val currentGoal = sharedPreferences.getInt("stepGoal", 10000)
         etStepGoal.setText(currentGoal.toString())
@@ -54,7 +54,7 @@ class SettingsActivity : AppCompatActivity() {
         val currentAnim = sharedPreferences.getString("animStyle", "walking")
         when (currentAnim) {
             "jogging" -> rbJogging.isChecked = true
-            "sprinting" -> rbSprinting.isChecked = true
+            "running" -> rbRunning.isChecked = true
             else -> rbWalking.isChecked = true
         }
 
@@ -64,7 +64,7 @@ class SettingsActivity : AppCompatActivity() {
             
             val selectedAnim = when (rgAnimation.checkedRadioButtonId) {
                 R.id.rb_jogging -> "jogging"
-                R.id.rb_sprinting -> "sprinting"
+                R.id.rb_running -> "running"
                 else -> "walking"
             }
             
