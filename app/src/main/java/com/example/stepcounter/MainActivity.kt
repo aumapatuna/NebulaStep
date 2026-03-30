@@ -117,7 +117,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         
         val oldSteps = stepsTextView.text.toString().toIntOrNull() ?: 0
         stepsTextView.text = currentSteps.toString()
-        titleTextView.text = "Today's Progress (Goal: $goal)"
+        titleTextView.text = "Today's Progress"
+        
+        val goalTextView = findViewById<TextView>(R.id.tv_goal)
+        val formattedGoal = java.text.NumberFormat.getNumberInstance(java.util.Locale.US).format(goal)
+        goalTextView.text = "Daily Goal: $formattedGoal steps"
         
         // Pop heartbeat animation when steps increase
         if (currentSteps > oldSteps && currentSteps > 0) {

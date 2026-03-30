@@ -11,7 +11,7 @@
         android:id="@+id/iv_settings"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@android:drawable/ic_menu_crop"
+        android:src="@drawable/ic_settings"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:padding="8dp"
@@ -24,7 +24,7 @@
         android:id="@+id/iv_report"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@android:drawable/ic_menu_sort_by_size"
+        android:src="@drawable/ic_history"
         android:layout_marginEnd="8dp"
         android:padding="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -41,10 +41,28 @@
         android:textColor="@color/text_bright"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_settings" />
+
+    <TextView
+        android:id="@+id/tv_goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goal: 10,000 steps"
+        android:textColor="@color/nebula_primary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:background="@drawable/bg_pill_accent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     <!-- Lottie Animation View for the human walking -->
     <com.airbnb.lottie.LottieAnimationView
@@ -57,7 +75,7 @@
         app:layout_constraintBottom_toTopOf="@+id/card_steps"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_goal"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp" />
 
@@ -71,7 +89,7 @@
         app:layout_constraintBottom_toTopOf="@+id/card_steps"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_goal"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp" />
 
