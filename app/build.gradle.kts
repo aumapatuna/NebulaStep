@@ -61,4 +61,7 @@ dependencies {
     
     // Google Sign-In Library
     implementation("com.google.android.gms:play-services-auth:21.0.0")
+
+    // Charts Library for Desktop-Like Advanced Dashboard
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
