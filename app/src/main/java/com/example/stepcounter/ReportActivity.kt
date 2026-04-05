@@ -150,6 +150,14 @@ class ReportActivity : AppCompatActivity() {
 
     private fun renderPieChart(chart: PieChart, totalSteps: Long) {
         chart.description.isEnabled = false
+        
+        if (totalSteps <= 0L) {
+            chart.setNoDataText("No activity logged yet.")
+            chart.setNoDataTextColor(Color.parseColor("#88A0B8"))
+            chart.clear()
+            return
+        }
+
         chart.setUsePercentValues(true)
         chart.isDrawHoleEnabled = true
         chart.holeRadius = 65f
@@ -165,6 +173,7 @@ class ReportActivity : AppCompatActivity() {
 
         chart.legend.textColor = Color.WHITE
         chart.legend.isWordWrapEnabled = true
+
 
         val entries = ArrayList<PieEntry>()
         // Derive rough estimates from total steps for the pie visual!

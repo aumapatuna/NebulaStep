@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <!-- The background track represents the fully completed 1X Goal (Cyan base) -->
+        <shape
+            android:innerRadiusRatio="3.5"
+            android:shape="ring"
+            android:thicknessRatio="12"
+            android:useLevel="false">
+            <solid android:color="#00E5FF" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <rotate
+            android:fromDegrees="270"
+            android:toDegrees="270">
+            <shape
+                android:innerRadiusRatio="3.5"
+                android:shape="ring"
+                android:thicknessRatio="12"
+                android:useLevel="true">
+                <!-- A massive achievement Sweep Gradient (Magenta into Gold) -->
+                <gradient
+                    android:angle="0"
+                    android:endColor="#FFD700"
+                    android:startColor="#FF007F"
+                    android:type="sweep"
+                    android:useLevel="false" />
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

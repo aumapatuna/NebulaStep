@@ -23,14 +23,31 @@ class StepWidgetProvider : AppWidgetProvider() {
 
             val views = RemoteViews(context.packageName, R.layout.widget_step_counter)
             
+            // Get dynamic user defined goal (default 10,000)
+            val maxSteps = prefs.getInt("stepGoal", 10000)
+            
             // Format number with commas like the design (e.g., "8,432")
             val formattedSteps = java.text.NumberFormat.getNumberInstance(java.util.Locale.US).format(steps)
             views.setTextViewText(R.id.tv_widget_steps, formattedSteps)
 
-            // Update the circular progress ring (max 10000)
-            val maxSteps = 10000
-            val progress = minOf(steps, maxSteps)
-            views.setProgressBar(R.id.pb_widget_steps, maxSteps, progress, false)
+            // Dynamic Progress Ring Logic! 
+            // If they step BEYOND their goal, we show a gorgeous overlapping achievement ring!
+            if (steps >= maxSteps) {
+                // Pin base ring to 100%
+                views.setProgressBar(R.id.pb_widget_steps, maxSteps, maxSteps, false)
+                
+                // Show the overlapping ring!
+                views.setViewVisibility(R.id.pb_widget_steps_over, android.view.View.VISIBLE)
+                
+                // The overlapping ring sweeps its progress modularly! (e.g. 15,000 steps on 10k goal = 5k wrap around)
+                val overlapProgress = steps % maxSteps
+                views.setProgressBar(R.id.pb_widget_steps_over, maxSteps, overlapProgress, false)
+                
+            } else {
+                // User hasn't hit goal yet. Hide the achievement ring.
+                views.setViewVisibility(R.id.pb_widget_steps_over, android.view.View.GONE)
+                views.setProgressBar(R.id.pb_widget_steps, maxSteps, steps, false)
+            }
 
             // Clicking the widget boldly returns you to the main app dashboard
             val intent = Intent(context, LoginActivity::class.java) // Use LoginActivity to respect routing
