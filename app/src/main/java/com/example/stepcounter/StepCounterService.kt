@@ -58,7 +58,13 @@ class StepCounterService : Service(), SensorEventListener {
             addAction(Intent.ACTION_DATE_CHANGED)    // System date change
             addAction(Intent.ACTION_TIMEZONE_CHANGED)
         }
-        registerReceiver(timeBoundaryReceiver, filter)
+        
+        // Fix for Xiaomi / Android 14+ strict requirements for dynamic receivers
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(timeBoundaryReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+        } else {
+            registerReceiver(timeBoundaryReceiver, filter)
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
