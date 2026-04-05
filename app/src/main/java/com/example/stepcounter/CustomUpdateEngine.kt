@@ -32,8 +32,10 @@ object CustomUpdateEngine {
                     val releaseNotes = document.getString("release_notes") ?: "Bug fixes and improvements."
 
                     if (latestVersion > CURRENT_VERSION && downloadUrl.isNotEmpty()) {
-                        // The Cloud is newer! Block the user and force an OTA Update.
-                        showUpdateDialog(activity, latestVersion, releaseNotes, downloadUrl)
+                        // The Cloud is newer! Check we haven't already finished the activity and moved to MainActivity
+                        if (!activity.isFinishing && !activity.isDestroyed) {
+                            showUpdateDialog(activity, latestVersion, releaseNotes, downloadUrl)
+                        }
                     }
                 }
             }
