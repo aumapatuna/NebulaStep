@@ -34,6 +34,14 @@ class StepCounterService : Service(), SensorEventListener {
     private val CHANNEL_ID = "StepCounterChannel_V2"
     private val NOTIFICATION_ID = 1
 
+    private val timeBoundaryReceiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            // Fires natively periodically by Android OS (every minute or date change).
+            // We use this to detect sharp 12:00 AM midnights even if the user is sleeping and not generating sensor events!
+            handleMidnightReset()
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -43,6 +51,14 @@ class StepCounterService : Service(), SensorEventListener {
         
         // Android requires a Notification Channel to display a persistent notification
         createNotificationChannel()
+
+        // Register clock listener to catch exactly 12:00 AM without relying on sensor events!
+        val filter = android.content.IntentFilter().apply {
+            addAction(Intent.ACTION_TIME_TICK)       // Fires every minute exactly on the zero second
+            addAction(Intent.ACTION_DATE_CHANGED)    // System date change
+            addAction(Intent.ACTION_TIMEZONE_CHANGED)
+        }
+        registerReceiver(timeBoundaryReceiver, filter)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -59,7 +75,8 @@ class StepCounterService : Service(), SensorEventListener {
 
         // We bind the hardware sensor to THIS background service.
         stepSensor?.let {
-            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
+            // SENSOR_DELAY_FASTEST requests maximum realtime smoothness from the OS batching buffer!
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_FASTEST)
         }
 
         // If killed by extreme memory pressure, OS will try to restart it automatically
@@ -243,5 +260,6 @@ class StepCounterService : Service(), SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         sensorManager.unregisterListener(this) // Prevent memory leaks if the OS forcefully kills us
+        unregisterReceiver(timeBoundaryReceiver) // Detach our midnight listener cleanly
     }
 }
