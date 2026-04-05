@@ -1,162 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E2A38"
-    android:fillViewport="true">
+    android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cloud Analytics Dashboard"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:padding="24dp"
+        android:background="#121A23"/>
+
+    <!-- Overview Block -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_dashboard_card"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp"
+        android:layout_margin="16dp"
+        android:elevation="4dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cloud Analytics Dashboard"
-            android:textColor="#FFFFFF"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"/>
+            android:text="Total Steps Logged"
+            android:textColor="#88A0B8"
+            android:textSize="14sp" />
 
-        <!-- Overview Block -->
+        <TextView
+            android:id="@+id/tv_total_steps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="48sp"
+            android:fontFamily="sans-serif-light" />
+
+        <!-- KPI Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_dashboard_card"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:layout_marginBottom="16dp"
-            android:elevation="4dp">
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:weightSum="3">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Historic Summary"
-                android:textColor="#88A0B8"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.05" />
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <TextView android:id="@+id/kpi1_val" android:text="0" android:textColor="#2494F2" android:textSize="24sp" android:textStyle="bold" />
+                <TextView android:text="Active Days" android:textColor="#88A0B8" android:textSize="11sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_total_steps"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="48sp"
-                android:fontFamily="sans-serif-light" />
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <TextView android:id="@+id/kpi2_val" android:text="0%" android:textColor="#89C74A" android:textSize="24sp" android:textStyle="bold" />
+                <TextView android:text="Success" android:textColor="#88A0B8" android:textSize="11sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Steps Logged"
-                android:textColor="#88A0B8"
-                android:textSize="14sp" />
-
-            <!-- KPI Row Mimicking Desktop Circles -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="24dp"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    
-                    <TextView android:id="@+id/kpi1_val" android:text="0" android:textColor="#2494F2" android:textSize="24sp" android:textStyle="bold" />
-                    <TextView android:text="Active Days" android:textColor="#88A0B8" android:textSize="11sp" android:layout_marginTop="4dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView android:id="@+id/kpi2_val" android:text="0%" android:textColor="#89C74A" android:textSize="24sp" android:textStyle="bold" />
-                    <TextView android:text="Goal Success" android:textColor="#88A0B8" android:textSize="11sp" android:layout_marginTop="4dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView android:id="@+id/kpi3_val" android:text="0" android:textColor="#E24A45" android:textSize="24sp" android:textStyle="bold"/>
-                    <TextView android:text="Total Calories" android:textColor="#88A0B8" android:textSize="11sp" android:layout_marginTop="4dp"/>
-                </LinearLayout>
-
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <TextView android:id="@+id/kpi3_val" android:text="0" android:textColor="#E24A45" android:textSize="24sp" android:textStyle="bold"/>
+                <TextView android:text="Kcal Burned" android:textColor="#88A0B8" android:textSize="11sp" android:layout_marginTop="4dp"/>
             </LinearLayout>
         </LinearLayout>
-
-        <!-- Main Chart: Hourly/Daily Views -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_dashboard_card"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp"
-            android:elevation="4dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Historic Steps &amp; Calories"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:layout_marginBottom="16dp"
-                android:textStyle="bold"/>
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/line_chart"
-                android:layout_width="match_parent"
-                android:layout_height="250dp" />
-        </LinearLayout>
-
-        <!-- Sub Charts row (Mobile stacked) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_dashboard_card"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp"
-            android:elevation="4dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Usage Breakdown"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"
-                android:textStyle="bold"/>
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/pie_chart"
-                android:layout_width="match_parent"
-                android:layout_height="220dp" />
-        </LinearLayout>
-
-        <!-- Status Log -->
-        <TextView
-            android:id="@+id/tv_report_logs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="#88A0B8"
-            android:textSize="14sp"
-            android:text="Querying Secure Cloud Engine..."
-            android:paddingBottom="40dp" />
-
     </LinearLayout>
-</ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Daily Breakdown"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tv_report_logs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#2494F2"
+        android:textSize="14sp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp"
+        android:text="Syncing securely..." />
+
+    <!-- Pure Native Bar Chart Simulator using ScrollView + Layouts -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        
+        <LinearLayout
+            android:id="@+id/history_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="40dp">
+            <!-- Dynamic native views inserted here -->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
