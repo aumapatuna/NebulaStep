@@ -131,7 +131,7 @@ class ReportActivity : AppCompatActivity() {
         stepSet.lineWidth = 2.5f
         stepSet.circleRadius = 4f
         stepSet.setDrawValues(false)
-        stepSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+        stepSet.mode = if (steps.size > 1) LineDataSet.Mode.CUBIC_BEZIER else LineDataSet.Mode.LINEAR
 
         // Calorie Series (Green)
         val calSet = LineDataSet(cals, "Calories Burned")
@@ -140,7 +140,7 @@ class ReportActivity : AppCompatActivity() {
         calSet.lineWidth = 2.5f
         calSet.circleRadius = 4f
         calSet.setDrawValues(false)
-        calSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+        calSet.mode = if (cals.size > 1) LineDataSet.Mode.CUBIC_BEZIER else LineDataSet.Mode.LINEAR
 
         val lineData = LineData(stepSet, calSet)
         chart.data = lineData
