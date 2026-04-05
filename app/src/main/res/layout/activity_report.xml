@@ -2,33 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:background="#121212">
+    android:background="#1E2A38"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cloud History"
-        android:textColor="#FFFFFF"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
-
-    <!-- A scrolling pane to read 30 days of downloaded cloud data! -->
-    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        
+        android:layout_height="wrap_content"
+        android:text="Nebula Cloud Analytics"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:padding="24dp"
+        android:background="#121A23"/>
+
+    <!-- Cloud Status and Motivation Phrase -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dashboard_card"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_margin="16dp"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/tv_motivation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Syncing securely..."
+            android:textColor="#00E5FF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
         <TextView
             android:id="@+id/tv_report_logs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading your cosmic journey..."
+            android:textColor="#88A0B8"
+            android:textSize="14sp" />
+            
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33FFFFFF"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#AAAAAA"
-            android:textSize="18sp"
-            android:lineSpacingExtra="8dp"
-            android:text="Loading records from Firebase Cloud..." />
-            
-    </ScrollView>
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:text="TOTAL STEPS" android:textColor="#88A0B8" android:textSize="11sp"/>
+                <TextView android:id="@+id/tv_total_steps" android:text="0" android:textColor="#FFFFFF" android:textSize="28sp" android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:text="CALORIES" android:textColor="#88A0B8" android:textSize="11sp"/>
+                <TextView android:id="@+id/tv_total_cals" android:text="0" android:textColor="#E24A45" android:textSize="28sp" android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Day-by-Day Journey"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"/>
+
+    <!-- MPAndroidChart BarChart -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard_card"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        android:elevation="4dp">
+        
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </LinearLayout>
