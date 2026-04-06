@@ -81,8 +81,8 @@ class StepCounterService : Service(), SensorEventListener {
 
         // We bind the hardware sensor to THIS background service.
         stepSensor?.let {
-            // SENSOR_DELAY_FASTEST requests maximum realtime smoothness from the OS batching buffer!
-            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_FASTEST)
+            // SENSOR_DELAY_UI requests a reliable hardware speed without triggering OS battery-throttling!
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
         }
 
         // If killed by extreme memory pressure, OS will try to restart it automatically
@@ -97,14 +97,18 @@ class StepCounterService : Service(), SensorEventListener {
             handleMidnightReset()
 
             if (previousTotalSteps == 0f) {
+                // First ever boot!
                 previousTotalSteps = totalSteps
                 saveData()
             }
 
             var currentSteps = totalSteps.toInt() - previousTotalSteps.toInt()
             if (currentSteps < 0) {
-                previousTotalSteps = totalSteps
-                currentSteps = 0
+                // ⚠️ THE USER REBOOTED THEIR PHONE! The hardware sensor dropped back to 0.
+                // We MUST mathematically shift the previousTotalSteps down into the negative
+                // so that when we subtract it from the NEW totalSteps, we get the exact same currentSessionSteps we had before the reboot!
+                previousTotalSteps = totalSteps - currentSessionSteps
+                currentSteps = totalSteps.toInt() - previousTotalSteps.toInt()
             }
             
             // ONLY execute expensive writes if the step count actually moved upwards!
